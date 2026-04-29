@@ -1,0 +1,21 @@
+<h1>Login</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>Email</label>
+    <input type="email" formControlName="email">
+
+    @if(loginForm.get('email')?.touched && loginForm.get('email')?.invalid){
+        <div>
+            @if(loginForm.get('email')?.errors?.['required']){
+                <small>El email es obligatorio</small>
+            }
+
+            @if(loginForm.get('email')?.errors?.['email']){
+                <small>El email no es válido</small>
+            }
+        </div>
+    }
+
+    <button type="submit">Log in</button>
+</form>
+

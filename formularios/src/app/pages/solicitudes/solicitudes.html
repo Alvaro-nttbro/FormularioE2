@@ -1,0 +1,7 @@
+<h1>Solicitudes</h1>
+<button (click)="logOut()">Log out</button>
+<button [routerLink]="['/misSolicitudes']">Mis Solicitudes</button>
+<button (click)="open()">Nueva solicitud</button>
+@if(openForm()){
+    <app-solicitud-form></app-solicitud-form>
+}

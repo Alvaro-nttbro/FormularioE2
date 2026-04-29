@@ -1,0 +1,19 @@
+<h1>Formulario</h1>
+<form [formGroup]="solicitudForm" (ngSubmit)="onSubmit()">
+    <label>Título</label>
+    <input type="text">
+
+    <label>Descripción</label>
+    <input type="text">
+
+    <label>Categoría</label>
+    <input type="text">
+
+    <label>Prioridad (1-5)</label>
+    <input type="number" min="1" max="5">
+
+    <label>Email</label>
+    <input type="email">
+
+    <button type="submit">Crear</button>
+</form>
