@@ -12,6 +12,7 @@ export class Solicitudes {
   private router = inject(Router);
 
   openForm = signal(false);
+  successMessage = signal('');
 
   logOut(){
     this.router.navigate(['/login']);
@@ -19,5 +20,10 @@ export class Solicitudes {
 
   open(){
     this.openForm.set(true);
+  }
+
+  close(menssage: string){
+    this.openForm.set(false);
+    this.successMessage.set(menssage);
   }
 }

@@ -1,0 +1,127 @@
+.list-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 30px;
+}
+
+button {
+  display: block;
+  margin: 5% auto;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background: #d1d5db;
+  transform: translateY(-2px);
+}
+
+.filters-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0 30px 0;
+}
+
+.filters-container input,
+.filters-container select {
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: #ffffff;
+  outline: none;
+  min-width: 220px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.filters-container input:focus,
+.filters-container select:focus {
+  border-color: #9ca3af;
+  box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.2);
+}
+
+.filters-container button {
+  display: inline-block;
+  margin: 0;
+  padding: 12px 16px;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.filters-container button:hover {
+  background: #e5e7eb;
+}
+
+.info-message {
+  text-align: center;
+  color: #4b5563;
+  font-size: 15px;
+  margin: 20px 0;
+}
+
+.error-message {
+  text-align: center;
+  color: #ef4444;
+  font-size: 15px;
+  margin: 20px 0;
+}
+
+.solicitudes-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+mat-expansion-panel {
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+  background: #ffffff;
+}
+
+mat-expansion-panel-header {
+  padding: 18px 20px;
+}
+
+mat-panel-title {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+mat-panel-description {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.solicitud-detail {
+  list-style: none;
+  padding: 0 20px 20px 20px;
+  margin: 0;
+}
+
+.solicitud-detail li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  font-size: 14px;
+}
+
+.solicitud-detail li:last-child {
+  border-bottom: none;
+}

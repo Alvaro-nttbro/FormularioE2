@@ -1,7 +1,23 @@
-<h1>Solicitudes</h1>
-<button (click)="logOut()">Log out</button>
-<button [routerLink]="['/misSolicitudes']">Mis Solicitudes</button>
-<button (click)="open()">Nueva solicitud</button>
-@if(openForm()){
-    <app-solicitud-form></app-solicitud-form>
-}
+<div class="container">
+    <h1>Solicitudes</h1>
+
+    <div class="button-group">
+        <button class="secondary" (click)="logOut()">Log out</button>
+        <button class="secondary" [routerLink]="['/misSolicitudes']">
+            Mis Solicitudes
+        </button>
+        <button class="primary" (click)="open()">
+            Nueva solicitud
+        </button>
+    </div>
+
+    @if(successMessage()){
+        <div class="success">
+            <small>{{successMessage()}}</small>
+        </div>
+    }
+
+    @if(openForm()){
+        <app-solicitud-form (closeModal)="close($event)"></app-solicitud-form>
+    }
+</div>

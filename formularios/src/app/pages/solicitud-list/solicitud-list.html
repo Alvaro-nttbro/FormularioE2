@@ -1,1 +1,71 @@
-<p>solicitud-list works!</p>
+<div class="list-container">
+  <h1>Mis Solicitudes</h1>
+  <button (click)="volver()">Volver</button>
+
+  @if (!loading() && !error()) {
+    <div class="filters-container">
+      <input
+        type="text"
+        placeholder="Filtrar por título"
+        [value]="tituloFiltro()"
+        (input)="onTituloChange($event)"
+      />
+
+      <select
+        [value]="prioridadFiltro() === null ? '' : prioridadFiltro()"
+        (change)="onPrioridadChange($event)"
+      >
+        <option value="">Todas las prioridades</option>
+        <option [value]="1">1</option>
+        <option [value]="2">2</option>
+        <option [value]="3">3</option>
+        <option [value]="4">4</option>
+        <option [value]="5">5</option>
+      </select>
+
+      <button type="button" (click)="limpiarFiltros()">Limpiar filtros</button>
+    </div>
+  }
+
+  @if (loading()) {
+    <p class="info-message">Cargando solicitudes...</p>
+  }
+
+  @if (error()) {
+    <p class="error-message">{{ error() }}</p>
+  }
+
+  @if (!loading() && !error() && solicitudes().length === 0) {
+    <p class="info-message">No hay solicitudes para este email.</p>
+  }
+
+  @if (!loading() && !error() && solicitudes().length > 0 && solicitudesFiltradas().length === 0) {
+    <p class="info-message">No hay solicitudes que coincidan con los filtros.</p>
+  }
+
+  @if (!loading() && !error() && solicitudesFiltradas().length > 0) {
+    <mat-accordion class="solicitudes-accordion">
+      @for (s of solicitudesFiltradas(); track s.id) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ s.titulo }}
+            </mat-panel-title>
+
+            <mat-panel-description>
+              Prioridad: {{ s.prioridad }} · {{ s.created_at | date:'dd/MM/yyyy HH:mm' }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <ul class="solicitud-detail">
+            <li><strong>Título:</strong> {{ s.titulo }}</li>
+            <li><strong>Descripción:</strong> {{ s.descripcion }}</li>
+            <li><strong>Categoría:</strong> {{ s.categoria }}</li>
+            <li><strong>Prioridad:</strong> {{ s.prioridad }}</li>
+            <li><strong>Email:</strong> {{ s.email }}</li>
+          </ul>
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+  }
+</div>
