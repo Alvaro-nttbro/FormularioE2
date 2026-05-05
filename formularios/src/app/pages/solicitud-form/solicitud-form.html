@@ -1,86 +1,137 @@
 <div class="form-section">
-
   <div class="form-header">
     <h2>Nueva Solicitud</h2>
-    <button type="button" class="close-button" (click)="cancel()" [disabled]="submitting()">×</button>
+    <button
+      type="button"
+      class="close-button"
+      (click)="cancel()"
+      [disabled]="submitting()"
+    >
+      ×
+    </button>
   </div>
 
-  <hr class="divider">
+  <hr class="divider" />
 
-  <form [formGroup]="solicitudForm" (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="solicitudForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <label for="titulo">Título</label>
+    <input
+      id="titulo"
+      type="text"
+      formControlName="titulo"
+      aria-describedby="tituloErr"
+    />
 
-    <label>Título</label>
-    <input type="text" formControlName="titulo">
-
-    @if(solicitudForm.get('titulo')?.touched && solicitudForm.get('titulo')?.invalid){
-      <div>
-        @if(solicitudForm.get('titulo')?.errors?.['required']){
-          <small>El título es obligatorio</small>
+    @if (solicitudForm.get('titulo')?.touched && solicitudForm.get('titulo')?.invalid) {
+      <div id="tituloErr">
+        @if (solicitudForm.get('titulo')?.errors?.['required']) {
+          <small aria-live="assertive">El título es obligatorio</small>
         }
-        @if(solicitudForm.get('titulo')?.errors?.['minlength']){
-          <small>El título debe tener al menos 5 caracteres</small>
+        @if (solicitudForm.get('titulo')?.errors?.['minlength']) {
+          <small aria-live="assertive">El título debe tener al menos 5 caracteres</small>
         }
-        @if(solicitudForm.get('titulo')?.errors?.['maxlength']){
-          <small>El título no puede superar 60 caracteres</small>
-        }
-      </div>
-    }
-
-    <label>Descripción</label>
-    <input type="text" formControlName="descripcion">
-    @if(solicitudForm.get('descripcion')?.touched && solicitudForm.get('descripcion')?.invalid){
-      <div>
-        @if(solicitudForm.get('descripcion')?.errors?.['required']){
-          <small>La descripción es obligatoria</small>
-        }
-        @if(solicitudForm.get('descripcion')?.errors?.['minlength']){
-          <small>La descripción debe tener al menos 20 caracteres</small>
-        }
-        @if(solicitudForm.get('descripcion')?.errors?.['maxlength']){
-          <small>La descripción no puede superar 500 caracteres</small>
+        @if (solicitudForm.get('titulo')?.errors?.['maxlength']) {
+          <small aria-live="assertive">El título no puede superar 60 caracteres</small>
         }
       </div>
     }
 
-    <label>Categoría</label>
-    <input type="text" formControlName="categoria">
-
-    <label>Prioridad (1-5)</label>
-    <input type="number" min="1" max="5" formControlName="prioridad">
-      @if(solicitudForm.get('prioridad')?.touched && solicitudForm.get('prioridad')?.invalid){
-    <div>
-      @if(solicitudForm.get('prioridad')?.errors?.['required']){
-        <small>La prioridad es obligatoria</small>
-      }
-      @if(solicitudForm.get('prioridad')?.errors?.['min'] || solicitudForm.get('prioridad')?.errors?.['max']){
-        <small>La prioridad debe estar entre 1 y 5</small>
-      }
-    </div>
-}
-
-    <label>Email</label>
-    <input type="email" formControlName="email">
-    @if(solicitudForm.get('email')?.touched && solicitudForm.get('email')?.invalid){
-      <div>
-        @if(solicitudForm.get('email')?.errors?.['required']){
-          <small>El email es obligatorio</small>
+    <label for="descripcion">Descripción</label>
+    <input
+      id="descripcion"
+      type="text"
+      formControlName="descripcion"
+      aria-describedby="descripcionErr"
+    />
+    @if (solicitudForm.get('descripcion')?.touched && solicitudForm.get('descripcion')?.invalid) {
+      <div id="descripcionErr">
+        @if (solicitudForm.get('descripcion')?.errors?.['required']) {
+          <small aria-live="assertive">La descripción es obligatoria</small>
         }
-        @if(solicitudForm.get('email')?.errors?.['email']){
-          <small>El email no es válido</small>
+
+        @if (solicitudForm.get('descripcion')?.errors?.['minlength']) {
+          <small aria-live="assertive"
+            >La descripción debe tener al menos
+            {{ solicitudForm.get('descripcion')?.errors?.['minlength']?.['requiredLength'] | json }}
+            caracteres</small
+          >
+        }
+
+        @if (solicitudForm.get('descripcion')?.errors?.['maxlength']) {
+          <small aria-live="assertive"
+            >La descripción no puede superar los
+            {{ solicitudForm.get('descripcion')?.errors?.['maxlength']?.['requiredLength'] | json }}
+            caracteres</small
+          >
         }
       </div>
     }
 
-    <button type="submit" [disabled]="solicitudForm.invalid || submitting()">
-      @if(submitting()){
+    <label for="categoria">Categoría</label>
+    <input
+      id="categoria"
+      type="text"
+      formControlName="categoria"
+    />
+
+    <label for="prioridad">Prioridad (1-5)</label>
+    <input
+      id="prioridad"
+      type="number"
+      min="1"
+      max="5"
+      formControlName="prioridad"
+      aria-describedby="prioridadErr"
+    />
+
+    @if (solicitudForm.get('prioridad')?.touched && solicitudForm.get('prioridad')?.invalid) {
+      <div id="prioridadErr">
+        @if (solicitudForm.get('prioridad')?.errors?.['required']) {
+          <small aria-live="assertive">La prioridad es obligatoria</small>
+        }
+        @if (
+          solicitudForm.get('prioridad')?.errors?.['min'] ||
+          solicitudForm.get('prioridad')?.errors?.['max']
+        ) {
+          <small aria-live="assertive">La prioridad debe estar entre 1 y 5</small>
+        }
+      </div>
+    }
+
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      aria-describedby="emailErr"
+    />
+    @if (solicitudForm.get('email')?.touched && solicitudForm.get('email')?.invalid) {
+      <div id="emailErr">
+        @if (solicitudForm.get('email')?.errors?.['required']) {
+          <small aria-live="assertive">El email es obligatorio</small>
+        }
+        @if (solicitudForm.get('email')?.errors?.['email']) {
+          <small aria-live="assertive">El email no es válido</small>
+        }
+      </div>
+    }
+
+    <button
+      type="submit"
+      [disabled]="solicitudForm.invalid || submitting()"
+    >
+      @if (submitting()) {
         Enviando...
       } @else {
         Guardar
       }
     </button>
 
-    @if(errorMessage()){
-      <small>{{ errorMessage() }}</small>
+    @if (errorMessage()) {
+      <small aria-live="assertive">{{ errorMessage() }}</small>
     }
   </form>
 </div>

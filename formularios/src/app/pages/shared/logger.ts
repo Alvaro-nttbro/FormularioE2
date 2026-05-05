@@ -6,11 +6,11 @@ import { Injectable, signal } from '@angular/core';
 export class Logger {
   sessionEmail = signal<string | null>(null);
 
-  getEmail(){
+  getEmail() {
     return this.sessionEmail();
   }
 
-  setEmail(email: string){
+  setEmail(email: string) {
     this.sessionEmail.set(email);
   }
 }

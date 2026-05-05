@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, inject, output, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Logger } from '../shared/logger';
@@ -5,7 +6,7 @@ import { SolicitudService } from '../shared/solicitud-service';
 
 @Component({
   selector: 'app-solicitud-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, JsonPipe],
   templateUrl: './solicitud-form.html',
   styleUrl: './solicitud-form.css',
 })
@@ -25,14 +26,14 @@ export class SolicitudForm {
     categoria: [''],
     prioridad: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
     email: [this.logger.getEmail(), [Validators.required, Validators.email]],
-  })
+  });
 
-  async onSubmit(){
-    if(this.submitting()){
+  async onSubmit() {
+    if (this.submitting()) {
       return;
     }
 
-    if(this.solicitudForm.invalid){
+    if (this.solicitudForm.invalid) {
       this.solicitudForm.markAllAsTouched();
       return;
     }
@@ -47,8 +48,8 @@ export class SolicitudForm {
       categoria: this.solicitudForm.value.categoria,
       prioridad: this.solicitudForm.value.prioridad,
       email: this.solicitudForm.value.email,
-    }
-    
+    };
+
     try {
       await this.solicitudService.create(load);
       this.successMessage.set('Solicitud enviada correctamente');
@@ -66,11 +67,11 @@ export class SolicitudForm {
     }
   }
 
-  cancel(){
-    if(this.submitting()){
+  cancel() {
+    if (this.submitting()) {
       return;
     }
-    
+
     this.closeModal.emit('');
   }
 }

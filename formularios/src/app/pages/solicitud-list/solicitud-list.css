@@ -1,3 +1,14 @@
+/* Header */
+.header {
+  display: flex;
+  padding: 3%;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a96bc;
+  color: white;
+  font-size: 30px;
+}
+
 .list-container {
   max-width: 900px;
   margin: 40px auto;
@@ -47,7 +58,9 @@ button:hover {
   background: #ffffff;
   outline: none;
   min-width: 220px;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .filters-container input:focus,

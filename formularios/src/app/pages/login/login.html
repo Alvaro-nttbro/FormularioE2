@@ -1,21 +1,28 @@
 <h1>Login</h1>
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label>Email</label>
-    <input type="email" formControlName="email">
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+>
+  <label for="email">Email</label>
+  <input
+    id="email"
+    type="email"
+    formControlName="email"
+    aria-describedby="emailErr"
+  />
 
-    @if(loginForm.get('email')?.touched && loginForm.get('email')?.invalid){
-        <div>
-            @if(loginForm.get('email')?.errors?.['required']){
-                <small>El email es obligatorio</small>
-            }
+  @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+    <div id="emailErr">
+      @if (loginForm.get('email')?.errors?.['required']) {
+        <small aria-live="assertive">El email es obligatorio</small>
+      }
 
-            @if(loginForm.get('email')?.errors?.['email']){
-                <small>El email no es válido</small>
-            }
-        </div>
-    }
+      @if (loginForm.get('email')?.errors?.['email']) {
+        <small aria-live="assertive">El email no es válido</small>
+      }
+    </div>
+  }
 
-    <button type="submit">Log in</button>
+  <button type="submit">Log in</button>
 </form>
-

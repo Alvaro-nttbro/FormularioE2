@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Logger } from '../shared/logger';
 
 @Component({
@@ -15,11 +15,11 @@ export class Login {
   private router = inject(Router);
 
   loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]]
+    email: ['', [Validators.required, Validators.email]],
   });
 
-  onSubmit(){
-    if(this.loginForm.invalid){
+  onSubmit() {
+    if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }

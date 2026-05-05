@@ -1,14 +1,14 @@
-import { Component, computed, inject, signal} from '@angular/core';
-import { SolicitudService } from '../shared/solicitud-service';
+import { DatePipe, Location } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { Header } from '../header/header';
 import { Logger } from '../shared/logger';
 import { SolicitudModel } from '../shared/solicitud-model';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { DatePipe, Location } from '@angular/common';
-
+import { SolicitudService } from '../shared/solicitud-service';
 
 @Component({
   selector: 'app-solicitud-list',
-  imports: [DatePipe, MatExpansionModule],
+  imports: [DatePipe, MatExpansionModule, Header],
   templateUrl: './solicitud-list.html',
   styleUrl: './solicitud-list.css',
 })
@@ -17,7 +17,7 @@ export class SolicitudList {
   private solicitudService = inject(SolicitudService);
   private location = inject(Location);
 
-  solicitudes =  signal<SolicitudModel[]>([]);
+  solicitudes = signal<SolicitudModel[]>([]);
   loading = signal(false);
   error = signal('');
 
@@ -37,14 +37,14 @@ export class SolicitudList {
     });
   });
 
-  ngOnInit(){
+  ngOnInit() {
     this.loadSolicitudes();
   }
 
-  async loadSolicitudes(){
+  async loadSolicitudes() {
     const email = this.logger.getEmail();
-    
-    if(!email){
+
+    if (!email) {
       this.error.set('No hay ningún email en sesión');
       return;
     }
@@ -52,7 +52,7 @@ export class SolicitudList {
     this.loading.set(true);
     this.error.set('');
 
-    try{
+    try {
       const data = await this.solicitudService.getAllByEmail(email);
       this.solicitudes.set(data);
     } catch (err) {
@@ -70,13 +70,13 @@ export class SolicitudList {
 
   onPrioridadChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
-    
-    if(value === ''){
+
+    if (value === '') {
       this.prioridadFiltro.set(null);
       return;
     }
 
-    this.prioridadFiltro.set(Number (value));
+    this.prioridadFiltro.set(Number(value));
   }
 
   limpiarFiltros() {
@@ -84,7 +84,7 @@ export class SolicitudList {
     this.prioridadFiltro.set(null);
   }
 
-  volver(){
+  volver() {
     this.location.back();
   }
 }

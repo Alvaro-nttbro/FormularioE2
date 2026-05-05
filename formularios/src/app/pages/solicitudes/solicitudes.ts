@@ -1,28 +1,23 @@
-import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Header } from '../header/header';
 import { SolicitudForm } from '../solicitud-form/solicitud-form';
 
 @Component({
   selector: 'app-solicitudes',
-  imports: [RouterLink, SolicitudForm],
+  imports: [RouterLink, SolicitudForm, Header],
   templateUrl: './solicitudes.html',
   styleUrl: './solicitudes.css',
 })
 export class Solicitudes {
-  private router = inject(Router);
-
   openForm = signal(false);
   successMessage = signal('');
 
-  logOut(){
-    this.router.navigate(['/login']);
-  }
-
-  open(){
+  open() {
     this.openForm.set(true);
   }
 
-  close(menssage: string){
+  close(menssage: string) {
     this.openForm.set(false);
     this.successMessage.set(menssage);
   }
